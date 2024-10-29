@@ -63,6 +63,6 @@ git checkout main
 echo "Switched to the main branch."
 
 # 6. Restart the system
-echo "All tasks are completed. The system will reboot now."
+echo "All tasks are completed. The system need reboot."
 sudo reboot
 
