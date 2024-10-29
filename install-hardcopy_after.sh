@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# 0. Qt lib install 
+
+sudo apt-get install qtmultimedia5-dev -y
+
 # 1. Reset TeamViewer
 echo "Resetting TeamViewer..."
 sudo teamviewer --daemon stop
