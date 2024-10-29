@@ -40,7 +40,7 @@ git checkout v1.10.11
 cd build/install/scripts
 
 sudo bash install_udev_rules.sh
-echo "Orbbec SDK update complete."
+#echo "Orbbec SDK update complete."
 
 # 4. USB Settings
 echo "Configuring USB settings..."
