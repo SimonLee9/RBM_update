@@ -14,7 +14,20 @@ sudo apt-get install -y curl
 # nvm(노드 버전관리자) 설치
 echo "nvm(노드 버전관리자) 설치"
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# nvm이 이미 설치되어 있는지 확인
+if command -v nvm >/dev/null 2>&1; then
+    echo "nvm이 이미 설치되어 있습니다. 설치를 건너뜁니다."
+else
+    echo "nvm이 설치되어 있지 않습니다. 설치를 진행합니다."
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+    # nvm 환경변수 로드
+    echo "nvm 환경변수 로드"
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
 
 
 
@@ -48,9 +61,17 @@ node --version
 # MobileServer 설치
 echo "MobileServer 설치"
 cd ~
-git clone https://github.com/rainbow-mobile/web_robot_server.git
+#git clone https://github.com/rainbow-mobile/web_robot_server.git
+#cd web_robot_server
+#npm install #(up to date 뜨면 ok. added packages 뜨면 ok. severity vulnerability(보안경고) 있으면 npm audit fix)
+if [ -d "web_robot_server" ]; then
+    echo "web_robot_server 디렉토리가 이미 존재합니다. 클론을 건너뜁니다."
+else
+    git clone https://github.com/rainbow-mobile/web_robot_server.git
+fi
 cd web_robot_server
-npm install
+npm install #(up to date 뜨면 ok. added packages 뜨면 ok. severity vulnerability(보안경고) 있으면 npm audit fix)
+
 
 ## MobileServer 실행 (백그라운드 실행 및 재시작 설정)
 #echo "MobileServer 실행 (백그라운드 실행 및 재시작 설정)"
@@ -66,7 +87,12 @@ npm install
 echo "MobileWeb 설치"
 
 cd ~
-git clone https://github.com/rainbow-mobile/web_robot_ui.git
+#git clone https://github.com/rainbow-mobile/web_robot_ui.git
+if [ -d "web_robot_ui" ]; then
+    echo "web_robot_ui 디렉토리가 이미 존재합니다. 클론을 건너뜁니다."
+else
+    git clone https://github.com/rainbow-mobile/web_robot_ui.git
+fi
 cd web_robot_ui # (added packages 뜨면 ok.)
 npm install 
 npm run build
@@ -92,20 +118,36 @@ sudo apt-get install -y flex bison
 # TaskMan 클론 및 빌드
 echo "TaskMan 클론 및 빌드"
 cd ~
-git clone https://github.com/rainbow-mobile/app_taskman.git
+#git clone https://github.com/rainbow-mobile/app_taskman.git
+if [ -d "app_taskman" ]; then
+    echo "app_taskman 디렉토리가 이미 존재합니다. 클론을 건너뜁니다."
+else
+    git clone https://github.com/rainbow-mobile/app_taskman.git
+fi
 
 
 # 빌드 디렉토리 생성 및 빌드 (필요한 경우 추가 명령어를 작성하세요)
-echo "빌드 디렉토리 생성 및 빌드 (필요한 경우 추가 명령어를 작성하세요)"
+echo "빌드 디렉토리 생성 및 빌드"
 cd app_taskman
-mkdir build && cd build
+#mkdir build && cd build
+if [ ! -d "build" ]; then
+    mkdir build
+fi
+cd build
 cmake ..
 make
 
 
 # Sudo 설정 (nmcli 명령어에 비밀번호 없이 접근 가능하도록 설정)
 echo "Sudo 설정 (nmcli 명령어에 비밀번호 없이 접근 가능하도록 설정)"
-echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/nmcli" | sudo tee -a /etc/sudoers
+#echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/nmcli" | sudo tee -a /etc/sudoers
+
+if sudo grep -Fxq "$USER ALL=(ALL) NOPASSWD: /usr/bin/nmcli" /etc/sudoers; then
+    echo "sudoers에 이미 설정이 존재합니다. 건너뜁니다."
+else
+    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/nmcli" | sudo tee -a /etc/sudoers
+fi
+
 
 ## Sudo setting 
 # sudo visudo
