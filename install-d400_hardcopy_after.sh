@@ -6,26 +6,38 @@
 set -e
 
 # 업데이트 및 curl 설치
+echo "업데이트 및 curl 설치"
 sudo apt-get update
 sudo apt-get install -y curl
 
+
 # nvm(노드 버전관리자) 설치
+echo "nvm(노드 버전관리자) 설치"
+
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
 
 
 # nvm 환경변수 로드
+echo "nvm 환경변수 로드"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Node.js와 npm 설치
+echo "Node.js와 npm 설치"
+
 nvm install --lts
 nvm use --lts
 
 # npm 최신화
+echo "npm 최신화"
+
 npm install -g npm@latest
 
 # Node.js 버전 확인
+echo "Node.js 버전 확인"
+
 node --version
 
 # Git 계정 설정 (필요 시 주석 해제하여 사용)
@@ -34,28 +46,38 @@ node --version
 
 
 # MobileServer 설치
+echo "MobileServer 설치"
 cd ~
 git clone https://github.com/rainbow-mobile/web_mobile_server.git
 cd web_mobile_server
 npm install
 
 # MobileServer 실행 (백그라운드 실행 및 재시작 설정)
+echo "MobileServer 실행 (백그라운드 실행 및 재시작 설정)"
+
 sudo npm install -g pm2
 pm2 start src/server.js
 pm2 save
+
 # pm2 startup 명령의 출력 결과에 따라 추가 명령 실행 필요
 pm2 startup | tail -n 1 | sudo bash
 
 # MobileWeb 설치
+echo "MobileWeb 설치"
+
 cd ~
 git clone https://github.com/rainbow-mobile/web_mobile_ui.git
 cd web_mobile_ui
 npm install
 
 # MobileWeb 실행
+echo "MobileWeb 실행"
+
 npm run start &
 
 # 방화벽 포트 해제
+echo "방화벽 포트 해제"
+
 sudo ufw allow 8180    # MobileWeb
 sudo ufw allow 11334   # MobileServer
 sudo ufw allow 11337   # MobileServer
@@ -63,12 +85,17 @@ sudo ufw allow 11338   # MobileServer
 sudo ufw allow 10334   # MobileServer
 
 # TaskMan 설치에 필요한 패키지 설치
+echo "TaskMan 설치에 필요한 패키지 설치"
 sudo apt-get install -y flex bison
 
 # TaskMan 클론 및 빌드
+echo "TaskMan 클론 및 빌드"
 cd ~
 git clone https://github.com/rainbow-mobile/app_taskman.git
+
+
 # 빌드 디렉토리 생성 및 빌드 (필요한 경우 추가 명령어를 작성하세요)
+echo "빌드 디렉토리 생성 및 빌드 (필요한 경우 추가 명령어를 작성하세요)"
 cd app_taskman
 mkdir build && cd build
 cmake ..
@@ -76,6 +103,7 @@ make
 
 
 # Sudo 설정 (nmcli 명령어에 비밀번호 없이 접근 가능하도록 설정)
+echo "Sudo 설정 (nmcli 명령어에 비밀번호 없이 접근 가능하도록 설정)"
 echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/nmcli" | sudo tee -a /etc/sudoers
 
 ## Sudo setting 
@@ -91,12 +119,15 @@ echo "node.js 환경설치 완료"
 
 # MySQL 서버 설치
 #sudo apt-get update
+echo "MySQL 서버 설치"
 sudo apt-get install -y mysql-server
 
-# 보안설정
+# 보안 설정
+echo "보안 설정"
 sudo mysql_secure_installation
 
 # MySQL 보안 설정 자동화
+echo "MySQL 보안 설정 자동화"
 # 비밀번호 및 설정을 자동화하기 위해 expect를 사용합니다.
 sudo apt-get install -y expect
 
