@@ -48,6 +48,11 @@ echo "npm 최신화"
 
 npm install -g npm@latest
 
+# .bashrc 파일을 적용
+source ~/.bashrc
+
+echo ".bashrc 파일을 적용하였습니다."
+
 # Node.js 버전 확인
 echo "Node.js 버전 확인"
 
