@@ -48,8 +48,8 @@ node --version
 # MobileServer 설치
 echo "MobileServer 설치"
 cd ~
-git clone https://github.com/rainbow-mobile/web_mobile_server.git
-cd web_mobile_server
+git clone https://github.com/rainbow-mobile/web_robot_server.git
+cd web_robot_server
 npm install
 
 # MobileServer 실행 (백그라운드 실행 및 재시작 설정)
@@ -66,8 +66,8 @@ pm2 startup | tail -n 1 | sudo bash
 echo "MobileWeb 설치"
 
 cd ~
-git clone https://github.com/rainbow-mobile/web_mobile_ui.git
-cd web_mobile_ui
+git clone https://github.com/rainbow-mobile/web_robot_ui.git
+cd web_robot_ui
 npm install
 
 # MobileWeb 실행
