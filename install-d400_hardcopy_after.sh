@@ -130,12 +130,12 @@ fi
 echo "빌드 디렉토리 생성 및 빌드"
 cd app_taskman
 #mkdir build && cd build
-if [ ! -d "build" ]; then
-    mkdir build
-fi
-cd build
-cmake ..
-make
+#if [ ! -d "build" ]; then
+#    mkdir build
+#fi
+#cd build
+#cmake ..
+#make
 
 
 # Sudo 설정 (nmcli 명령어에 비밀번호 없이 접근 가능하도록 설정)
