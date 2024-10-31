@@ -52,28 +52,29 @@ git clone https://github.com/rainbow-mobile/web_robot_server.git
 cd web_robot_server
 npm install
 
-# MobileServer 실행 (백그라운드 실행 및 재시작 설정)
-echo "MobileServer 실행 (백그라운드 실행 및 재시작 설정)"
+## MobileServer 실행 (백그라운드 실행 및 재시작 설정)
+#echo "MobileServer 실행 (백그라운드 실행 및 재시작 설정)"
 
-sudo npm install -g pm2
-pm2 start src/server.js
-pm2 save
+#sudo npm install -g pm2
+#pm2 start src/server.js
+#pm2 save
 
-# pm2 startup 명령의 출력 결과에 따라 추가 명령 실행 필요
-pm2 startup | tail -n 1 | sudo bash
+## pm2 startup 명령의 출력 결과에 따라 추가 명령 실행 필요
+#pm2 startup | tail -n 1 | sudo bash
 
 # MobileWeb 설치
 echo "MobileWeb 설치"
 
 cd ~
 git clone https://github.com/rainbow-mobile/web_robot_ui.git
-cd web_robot_ui
-npm install
+cd web_robot_ui # (added packages 뜨면 ok.)
+npm install 
+npm run build
 
-# MobileWeb 실행
-echo "MobileWeb 실행"
+## MobileWeb 실행
+#echo "MobileWeb 실행"
 
-npm run start &
+#npm run start &
 
 # 방화벽 포트 해제
 echo "방화벽 포트 해제"
