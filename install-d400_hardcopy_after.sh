@@ -14,7 +14,7 @@ sudo apt-get install -y curl
 # nvm(노드 버전관리자) 설치
 echo "nvm(노드 버전관리자) 설치"
 
-#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
 # nvm이 이미 설치되어 있는지 확인
 if command -v nvm >/dev/null 2>&1; then
