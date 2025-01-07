@@ -5,6 +5,7 @@
 sudo sh -c 'echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/usr/local/lib" >> /etc/profile'
 sudo sh -c 'echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/home/rainbow/rplidar_sdk/output/Linux/Release" >> /etc/profile'
 #sudo sh -c 'echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/home/rainbow/OrbbecSDK/lib" >> /etc/profile'
+sudo sh -c 'echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/home/rainbow/OrbbecSDK/lib" >> /etc/profile'
 
 # 프로필 재적용
 source /etc/profile
