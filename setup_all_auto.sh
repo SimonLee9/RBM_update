@@ -38,12 +38,8 @@ log_failure() {
 ##########################
 install_package() {
     local pkg="$1"
-    if [ "$pkg" == "qt5-default" ]; then
-        if ! apt-cache show qt5-default > /dev/null 2>&1; then
-            echo "패키지 'qt5-default'는 설치 후보가 없습니다. 건너뜁니다."
-            return 0
-        fi
-    fi
+    # qt5-default는 제거. 필요 시 qtbase5-dev, qt5-qmake, libqt5gui5, etc. 로 대체.
+    
     if dpkg -l | grep -qw "$pkg"; then
         echo "패키지 '$pkg'가 이미 설치되어 있으므로 제거 후 재설치합니다."
         retry_cmd apt-get remove --purge -y "$pkg" || log_failure "패키지 '$pkg' 제거 실패"
@@ -110,7 +106,7 @@ retry_cmd apt-get upgrade -y || log_failure "패키지 업그레이드 실패"
 packages=(
   "build-essential"
   "make"
-  "qt5-default"
+  # "qt5-default" => 사용 중지
   "qtcreator"
   "qtdeclarative5-dev"
   "qttools5-dev"
@@ -146,6 +142,8 @@ packages=(
   "libgstreamer1.0-dev"
   "libgstreamer-plugins-base1.0-dev"
   "gstreamer1.0-rtsp"
+  # Qt SerialPort 모듈
+  "libqt5serialport5-dev"
 )
 install_packages "${packages[@]}"
 echo "필수 패키지 설치 단계 완료."
