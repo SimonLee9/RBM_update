@@ -154,6 +154,7 @@ echo "필수 패키지 설치 단계 완료."
 echo "2. 시스템 환경 설정을 진행합니다..."
 {
   echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/usr/local/lib" >> /etc/profile
+  echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/home/rainbow/slamnav2" >> /etc/profile
   echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:\$HOME/rplidar_sdk/output/Linux/Release" >> /etc/profile
   source /etc/profile
   retry_cmd ldconfig || log_failure "라이브러리 캐시 업데이트 실패"
