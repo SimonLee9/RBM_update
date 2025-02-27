@@ -306,7 +306,7 @@ if [ -d "$HOME/rplidar_sdk" ]; then
 fi
 retry_cmd git clone https://github.com/Slamtec/rplidar_sdk.git "$HOME/rplidar_sdk" || log_failure "RPlidar SDK 클론 실패"
 cd "$HOME/rplidar_sdk" || log_failure "RPlidar SDK 디렉토리 이동 실패"
-retry_cmd git checkout release/v1.12.0 || log_failure "RPlidar SDK 버전 release/v1.12.0 체크아웃 실패"
+# retry_cmd git checkout release/v1.12.0 || log_failure "RPlidar SDK 버전 release/v1.12.0 체크아웃 실패"
 retry_cmd make -j"$NUM_CORES" || log_failure "RPlidar SDK 빌드 실패"
 # ~/.bashrc에 LD_LIBRARY_PATH 항목 추가 (없으면)
 grep -q "rplidar_sdk" "$HOME/.bashrc" || echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:\$HOME/rplidar_sdk/output/Linux/Release" >> "$HOME/.bashrc"
