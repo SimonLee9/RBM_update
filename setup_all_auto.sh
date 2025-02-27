@@ -38,7 +38,6 @@ log_failure() {
 ##########################
 install_package() {
     local pkg="$1"
-    # qt5-default는 제거. 필요 시 qtbase5-dev, qt5-qmake, libqt5gui5, etc. 로 대체.
     
     if dpkg -l | grep -qw "$pkg"; then
         echo "패키지 '$pkg'가 이미 설치되어 있으므로 제거 후 재설치합니다."
@@ -142,8 +141,9 @@ packages=(
   "libgstreamer1.0-dev"
   "libgstreamer-plugins-base1.0-dev"
   "gstreamer1.0-rtsp"
-  # Qt SerialPort 모듈
   "libqt5serialport5-dev"
+  # 새로 추가
+  "libqt5gamepad5-dev"
 )
 install_packages "${packages[@]}"
 echo "필수 패키지 설치 단계 완료."
